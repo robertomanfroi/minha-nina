@@ -15,7 +15,7 @@ e lê o QR code com o celular.
 - Nunca mostre comandos, JSON ou mensagens de erro técnicas. Traduza: "a chave não funcionou", "falta o cartão".
 - A chave do Render (começa com `rnd_`) e a senha do conector são segredos: **não grave em arquivo**, não repita
   na tela depois de usar, guarde só em variável durante a conversa.
-- Use `curl` para a API. No Windows o Claude Code roda no Git Bash, onde `curl` e `openssl` existem.
+- Use `curl` para a API (no Windows o Claude Code costuma rodar no Git Bash, onde `curl` e `openssl` existem). Se não houver bash nem curl, faça as mesmas chamadas pelo PowerShell com `Invoke-RestMethod` (cabeçalho `Authorization: Bearer CHAVE`, corpo com `ConvertTo-Json -Depth 6`).
 - Programa instalado: repositório público `https://github.com/robertomanfroi/minha-nina` (não precisa de conta no GitHub).
 
 ## Sub-comandos
@@ -46,7 +46,7 @@ Pergunte: "Podemos começar?"
 2. Diga: "Clique em **Create API Key**, dê o nome *minha-nina*, clique em **Create** e **copie a chave** (começa com `rnd_`). Cole aqui para mim."
 3. Teste: `curl -s -H "Authorization: Bearer $CHAVE" https://api.render.com/v1/owners?limit=20`.
    - 401 → "A chave não funcionou. Copie de novo, inteira." Volte ao 2.
-   - Guarde o `owner.id` (se houver mais de um, use o do tipo `user`, ou pergunte qual "workspace").
+   - Guarde o `owner.id`. Conta nova costuma ter um só ("My Workspace"); se houver mais de um, pergunte em qual workspace criar, mostrando os nomes.
 
 ## Passo 3 — Já existe?
 `GET /v1/services?name=minha-nina&limit=20`. Se já houver um serviço `minha-nina`, não crie outro: pergunte se ela quer
